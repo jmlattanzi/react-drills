@@ -1,21 +1,54 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+    constructor() {
+        super()
+
+        this.state = {
+            filtered: [
+                'trash 🗑️',
+                'shrimp 🍤',
+                'bird 🐦',
+                'burger 🍔',
+                'cheese 🧀',
+                'cactus 🌵',
+                '🥃',
+            ],
+            strings: [
+                'trash 🗑️',
+                'shrimp 🍤',
+                'bird 🐦',
+                'burger 🍔',
+                'cheese 🧀',
+                'cactus 🌵',
+                '🥃',
+            ],
+        }
+
+        this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleChange(e) {
+        let arr = this.state.strings.filter((text) => text.startsWith(e))
+        this.setState({ filtered: arr })
+    }
+
+    render() {
+        return (
+            <div className='App'>
+                <input
+                    type='text'
+                    placeholder='🍔'
+                    onChange={(e) => this.handleChange(e.target.value)}
+                />
+
+                {this.state.filtered.map((e) => (
+                    <h2>{e}</h2>
+                ))}
+            </div>
+        )
+    }
 }
 
-export default App;
+export default App
